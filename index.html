@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mahjong Solitario</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="claro">
+  <header class="toolbar">
+    <h1 class="title">🀄 Mahjong</h1>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-label">Pares</span><span id="stat-pairs">72/72</span></div>
+      <div class="stat"><span class="stat-label">Tiempo</span><span id="stat-time">00:00</span></div>
+      <div class="stat"><span class="stat-label">Barajadas</span><span id="stat-shuffles">0</span></div>
+    </div>
+
+    <div class="controls">
+      <button id="btn-new" title="Nueva partida">Nueva</button>
+      <button id="btn-undo" title="Deshacer último movimiento">Deshacer</button>
+      <button id="btn-shuffle" title="Barajar las fichas restantes">Barajar</button>
+      <button id="btn-hint" title="Mostrar un par disponible">Pista</button>
+      <button id="btn-save" title="Guardar partida">Guardar</button>
+      <button id="btn-load" title="Cargar partida guardada">Cargar</button>
+      <button id="btn-sound" title="Activar / silenciar sonido">🔊</button>
+      <div class="zoom">
+        <button id="btn-zoom-out" title="Reducir fichas">−</button>
+        <span id="zoom-label">115%</span>
+        <button id="btn-zoom-in" title="Agrandar fichas">+</button>
+      </div>
+      <select id="theme-select" title="Tema visual">
+        <option value="claro">Claro</option>
+        <option value="oscuro">Oscuro</option>
+        <option value="noche">Noche</option>
+        <option value="clasico">Clásico</option>
+        <option value="madera">Madera</option>
+      </select>
+    </div>
+  </header>
+
+  <details class="legend">
+    <summary>Ver símbolos del juego</summary>
+    <div id="legend-content"></div>
+  </details>
+
+  <main id="board-wrap">
+    <div id="board"></div>
+  </main>
+
+  <div id="win-overlay" class="hidden">
+    <div class="win-card">
+      <h2>¡Has ganado! 🎉</h2>
+      <p id="win-time"></p>
+      <p id="win-shuffles"></p>
+      <button id="btn-win-new">Jugar de nuevo</button>
+    </div>
+  </div>
+
+  <div id="picker-overlay" class="hidden">
+    <div class="picker-card">
+      <h2>Elige tus fichas 🀄</h2>
+      <p class="picker-subtitle">Selecciona los símbolos de esta partida. Las 144 fichas se reparten en pares entre los que elijas.</p>
+      <div id="picker-symbols"></div>
+      <div class="picker-footer">
+        <span id="picker-count"></span>
+        <div class="picker-buttons">
+          <button id="btn-picker-all">Todo</button>
+          <button id="btn-picker-none">Ninguno</button>
+          <button id="btn-picker-cancel">Cancelar</button>
+          <button id="btn-picker-start" class="primary">Empezar partida</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="mahjong.js"></script>
+</body>
+</html>
