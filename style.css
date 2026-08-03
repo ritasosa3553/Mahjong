@@ -223,6 +223,33 @@ button.primary {
   font-variant-numeric: tabular-nums;
 }
 
+#btn-menu-toggle {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  #btn-menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1;
+    padding: 8px 13px;
+    margin-left: auto;
+  }
+
+  .toolbar.menu-collapsed {
+    gap: 0;
+    padding: 6px 10px;
+  }
+
+  .toolbar.menu-collapsed .title,
+  .toolbar.menu-collapsed .stats,
+  .toolbar.menu-collapsed .controls {
+    display: none;
+  }
+}
+
 /* ---------- Legend ---------- */
 .legend {
   margin: 8px 20px 0;

@@ -128,6 +128,8 @@
   const btnPickerNone = $("btn-picker-none");
   const btnPickerCancel = $("btn-picker-cancel");
   const btnPickerStart = $("btn-picker-start");
+  const toolbar = document.querySelector(".toolbar");
+  const btnMenuToggle = $("btn-menu-toggle");
 
   /* ============================================================
      UTILIDADES
@@ -301,6 +303,10 @@
     hideWinOverlay();
     applySymbols();
     recomputeFree();
+    if (isMobile()) {
+      toolbar.classList.add("menu-collapsed");
+      updateMenuIcon();
+    }
     layoutBoard();
     updateStats();
     render();
@@ -843,6 +849,19 @@
     pickerOverlay.classList.add("hidden");
   }
 
+  const mobileQuery = window.matchMedia("(max-width: 640px)");
+  const isMobile = () => mobileQuery.matches;
+
+  function updateMenuIcon() {
+    btnMenuToggle.textContent = toolbar.classList.contains("menu-collapsed") ? "☰" : "✕";
+  }
+
+  function toggleMenu() {
+    toolbar.classList.toggle("menu-collapsed");
+    updateMenuIcon();
+    layoutBoard();
+  }
+
   function startGameWithSelection() {
     if (pickerSel.size < 2) {
       toast("Selecciona al menos 2 símbolos.");
@@ -887,6 +906,7 @@
   });
   btnPickerStart.addEventListener("click", () => { startGameWithSelection(); });
   $("btn-win-new").addEventListener("click", () => { showPicker(); });
+  btnMenuToggle.addEventListener("click", () => { toggleMenu(); });
 
   window.addEventListener("resize", () => { layoutBoard(); });
 
