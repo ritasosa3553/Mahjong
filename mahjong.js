@@ -304,7 +304,7 @@
     applySymbols();
     recomputeFree();
     if (isMobile()) {
-      toolbar.classList.add("menu-collapsed");
+      toolbar.classList.remove("menu-open");
       updateMenuIcon();
     }
     layoutBoard();
@@ -853,13 +853,12 @@
   const isMobile = () => mobileQuery.matches;
 
   function updateMenuIcon() {
-    btnMenuToggle.textContent = toolbar.classList.contains("menu-collapsed") ? "☰" : "✕";
+    btnMenuToggle.textContent = toolbar.classList.contains("menu-open") ? "✕" : "☰";
   }
 
   function toggleMenu() {
-    toolbar.classList.toggle("menu-collapsed");
+    toolbar.classList.toggle("menu-open");
     updateMenuIcon();
-    layoutBoard();
   }
 
   function startGameWithSelection() {
@@ -907,6 +906,12 @@
   btnPickerStart.addEventListener("click", () => { startGameWithSelection(); });
   $("btn-win-new").addEventListener("click", () => { showPicker(); });
   btnMenuToggle.addEventListener("click", () => { toggleMenu(); });
+  document.querySelector(".controls").addEventListener("click", (e) => {
+    if (isMobile() && e.target.closest("button") && toolbar.classList.contains("menu-open")) {
+      toolbar.classList.remove("menu-open");
+      updateMenuIcon();
+    }
+  });
 
   window.addEventListener("resize", () => { layoutBoard(); });
 
